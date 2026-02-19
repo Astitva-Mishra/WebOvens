@@ -1,138 +1,106 @@
 import { motion } from 'framer-motion'
-import { Check, ArrowRight, Star } from 'lucide-react'
+import { Check } from 'lucide-react'
 import './Pricing.css'
 
 const plans = [
     {
-        name: 'Starter',
-        price: '₹49,999',
-        period: 'one-time',
-        description: 'Perfect for landing pages and simple websites',
+        id: 'Starter',
+        price: '₹50,000',
+        period: 'per project',
+        desc: 'For founders and early-stage teams needing a strong digital footprint.',
         features: [
-            'Custom landing page design',
-            'Mobile responsive',
-            'Basic SEO optimization',
-            'Contact form integration',
-            '2 revision rounds',
-            '14-day delivery',
-            '30 days post-launch support'
+            'Up to 5 pages',
+            'Responsive design',
+            'Core CMS integration',
+            'SEO foundations',
+            '30 days support',
         ],
-        cta: 'Start Project',
-        popular: false
     },
     {
-        name: 'Growth',
-        price: '₹1,49,999',
-        period: 'one-time',
-        description: 'For full-featured web applications and products',
+        id: 'Studio',
+        price: '₹1,50,000',
+        period: 'per project',
+        desc: 'For growth-stage companies building their flagship product.',
         features: [
-            'Everything in Starter',
-            'Full-stack development',
-            'User authentication',
-            'Database integration',
+            'Full custom product',
+            'User auth & billing',
             'Admin dashboard',
-            'API development',
-            'Payment integration',
-            'Unlimited revisions',
-            '21-day delivery',
-            '90 days post-launch support'
+            'API integrations',
+            'Priority delivery',
+            '90 days support',
         ],
-        cta: 'Start Project',
-        popular: true
+        highlight: true,
     },
     {
-        name: 'Enterprise',
+        id: 'Enterprise',
         price: 'Custom',
-        period: 'quote',
-        description: 'For complex platforms and ongoing partnerships',
+        period: 'contact us',
+        desc: 'For organisations requiring a long-term, deeply integrated engineering partner.',
         features: [
-            'Everything in Growth',
-            'Multi-platform (Web + Mobile)',
-            'Custom integrations',
-            'Dedicated project manager',
-            'Priority support',
+            'Everything in Studio',
+            'Multi-platform dev',
+            'Security architecture',
+            'Dedicated team pod',
             'SLA guarantee',
-            'Scalability planning',
-            'Ongoing maintenance',
-            'Custom timeline'
+            '24/7 support',
         ],
-        cta: 'Contact Us',
-        popular: false
-    }
+    },
 ]
 
 export default function Pricing() {
     return (
-        <section className="pricing" id="pricing">
+        <section className="pricing section" id="pricing">
             <div className="container">
-                <div className="section-header">
-                    <span className="section-eyebrow">
-                        <Star size={14} />
-                        Transparent Pricing
-                    </span>
-                    <h2 className="section-title">
-                        Simple, <span className="gradient-text">Honest</span> Pricing
-                    </h2>
-                    <p className="section-description">
-                        No hidden fees. No hourly billing surprises. Fixed scope, fixed price, delivered on time.
+                <div className="section-header" style={{ textAlign: 'center' }}>
+                    <div className="pill" style={{ margin: '0 auto 28px' }}>Investment</div>
+                    <h2 className="display-lg">Transparent pricing.</h2>
+                    <p className="body-lg" style={{ maxWidth: 500, margin: '20px auto 0' }}>
+                        Every plan is a fixed-scope project. No surprises, no hourly billing.
                     </p>
                 </div>
 
                 <div className="pricing-grid">
-                    {plans.map((plan, index) => (
+                    {plans.map((plan, i) => (
                         <motion.div
-                            key={plan.name}
-                            className={`pricing-card ${plan.popular ? 'popular' : ''}`}
-                            initial={{ opacity: 0, y: 50 }}
+                            key={plan.id}
+                            className={`pricing-card card ${plan.highlight ? 'pricing-card--highlight' : ''}`}
+                            initial={{ opacity: 0, y: 24 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
-                            transition={{ duration: 0.5, delay: index * 0.15 }}
+                            transition={{ duration: 0.6, delay: i * 0.1, ease: [0.25, 0.46, 0.45, 0.94] }}
                         >
-                            {plan.popular && (
-                                <div className="popular-badge">Most Popular</div>
+                            {plan.highlight && (
+                                <div className="pricing-popular-badge">Most Popular</div>
                             )}
 
-                            <div className="pricing-header">
-                                <h3>{plan.name}</h3>
-                                <div className="price-wrapper">
-                                    <span className="price">{plan.price}</span>
-                                    {plan.period !== 'quote' && (
-                                        <span className="period">{plan.period}</span>
-                                    )}
+                            <div className="pricing-header-row">
+                                <span className="pricing-plan-name">{plan.id}</span>
+                                <div className="pricing-price-wrap">
+                                    <span className="pricing-price">{plan.price}</span>
+                                    <span className="label pricing-period">{plan.period}</span>
                                 </div>
-                                <p className="plan-description">{plan.description}</p>
                             </div>
 
-                            <ul className="features-list">
-                                {plan.features.map((feature, i) => (
-                                    <li key={i}>
-                                        <Check size={16} className="check-icon" />
-                                        <span>{feature}</span>
+                            <p className="pricing-desc body-md">{plan.desc}</p>
+
+                            <div className="pricing-divider" />
+
+                            <ul className="pricing-features">
+                                {plan.features.map((f, j) => (
+                                    <li key={j}>
+                                        <Check size={13} className="pricing-check" />
+                                        <span>{f}</span>
                                     </li>
                                 ))}
                             </ul>
 
-                            <a
-                                href="#contact"
-                                className={`btn ${plan.popular ? 'btn-primary' : 'btn-secondary'} btn-block`}
-                            >
-                                {plan.cta}
-                                <ArrowRight size={16} className="btn-icon" />
+                            <a href="#contact" className={`btn ${plan.highlight ? 'btn-fire' : 'btn-ghost'} pricing-cta`}>
+                                Get Started
                             </a>
                         </motion.div>
                     ))}
                 </div>
-
-                <div className="pricing-note">
-                    <p>
-                        All prices are in INR. Need something different? <a href="#contact">Let's talk</a> — we customize to your needs.
-                    </p>
-                </div>
             </div>
-
-            {/* Decorative Elements */}
-            <div className="orb orb-orange pricing-orb-1 animate-pulse-glow" />
-            <div className="orb orb-dark pricing-orb-2" />
         </section>
     )
 }

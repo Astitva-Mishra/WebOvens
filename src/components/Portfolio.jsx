@@ -1,169 +1,72 @@
-import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { ExternalLink, ArrowUpRight, Layers, Code, Smartphone, Globe } from 'lucide-react'
+import { motion } from 'framer-motion'
+import { ArrowUpRight, ExternalLink } from 'lucide-react'
 import './Portfolio.css'
 
 const projects = [
   {
-    id: 'feather',
-    title: 'Feather',
-    subtitle: 'LinkedIn Content Automation',
-    description: 'Transform your GitHub commits into engaging LinkedIn posts. Build in public with zero effort.',
-    image: '/project-feather-landing.png',
-    url: 'https://feather-orcin.vercel.app/',
-    tags: ['React', 'Node.js', 'GitHub API', 'LinkedIn API'],
-    category: 'Web App',
-    icon: Code,
-    color: '#3B82F6'
+    title: 'E-Commerce Platform',
+    category: 'Website · React · Node.js',
+    description: 'Full-stack marketplace with real-time inventory, payment gateway, and 3x faster load times.',
+    color: 'rgba(245, 166, 35, 0.08)',
+    year: '2024',
   },
   {
-    id: 'feather-app',
-    title: 'Feather Dashboard',
-    subtitle: 'Content Management System',
-    description: 'Full-featured dashboard for managing posts, scheduling content, and tracking GitHub activity.',
-    image: '/project-feather-app.png',
-    url: 'https://feather-orcin.vercel.app/landing.html',
-    tags: ['React', 'Dashboard', 'Analytics'],
-    category: 'Dashboard',
-    icon: Layers,
-    color: '#3B82F6'
+    title: 'Restaurant ERP System',
+    category: 'Enterprise · React Native · Firebase',
+    description: 'End-to-end operations management — POS, KDS, inventory tracking, and multi-branch analytics.',
+    color: 'rgba(255, 107, 0, 0.06)',
+    year: '2024',
   },
   {
-    id: 'flowstrate',
-    title: 'FlowStrate',
-    subtitle: 'Workflow Automation Platform',
-    description: 'Automate workflows that save you 20+ hours every week. Define outcomes in plain English.',
-    image: '/project-flowstrate.png',
-    url: 'https://flowstate-rouge.vercel.app/',
-    tags: ['Next.js', 'Automation', 'AI'],
-    category: 'SaaS',
-    icon: Globe,
-    color: '#22C55E'
+    title: 'FinTech Mobile App',
+    category: 'App · React Native · AI',
+    description: 'AI-powered personal finance assistant with OCR receipt scanning and smart budget recommendations.',
+    color: 'rgba(201, 169, 110, 0.06)',
+    year: '2025',
   },
-  {
-    id: 'orderlo',
-    title: 'OrderLO',
-    subtitle: 'Restaurant POS System',
-    description: 'The revenue engine for high-volume venues. 10 minute setup. No new hardware. Just profit.',
-    image: '/project-orderlo.png',
-    url: 'https://order-lo.vercel.app/',
-    tags: ['React', 'Firebase', 'POS', 'Payments'],
-    category: 'Mobile + Web',
-    icon: Smartphone,
-    color: '#FF5733'
-  },
-  {
-    id: 'gharkachulha',
-    title: 'Ghar Ka Chulha',
-    subtitle: 'Food Delivery Platform',
-    description: 'Authentic home-cooked flavors delivered to your doorstep. Complete restaurant website with ordering.',
-    image: '/project-gharkachulha.png',
-    url: 'https://www.gharkachulha.in/',
-    tags: ['Next.js', 'E-commerce', 'Payments'],
-    category: 'E-commerce',
-    icon: Globe,
-    color: '#D4A574'
-  }
 ]
 
 export default function Portfolio() {
-  const [hoveredId, setHoveredId] = useState(null)
-
   return (
-    <section className="portfolio" id="portfolio">
-      {/* Background decoration */}
-      <div className="portfolio-bg">
-        <div className="grid-lines" />
-      </div>
-
+    <section className="portfolio section" id="portfolio">
       <div className="container">
-        <div className="section-header">
-          <span className="section-eyebrow">
-            <Layers size={14} />
-            Our Work
-          </span>
-          <h2 className="section-title">
-            Products We've <span className="gradient-text-new">Shipped</span>
-          </h2>
-          <p className="section-description">
-            Real products. Real results. See what we've built for ambitious founders and businesses.
-          </p>
+        <div className="section-eyebrow">
+          <div className="pill">Selected Work</div>
+          <h2 className="display-lg">Case studies.</h2>
         </div>
 
-        <div className="portfolio-grid">
-          {projects.map((project, index) => (
-            <motion.a
-              key={project.id}
-              href={project.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`portfolio-card ${hoveredId === project.id ? 'hovered' : ''}`}
-              onMouseEnter={() => setHoveredId(project.id)}
-              onMouseLeave={() => setHoveredId(null)}
-              initial={{ opacity: 0, y: 50 }}
+        <div className="portfolio-stack">
+          {projects.map((proj, i) => (
+            <motion.article
+              key={i}
+              className="project-card"
+              style={{ '--card-glow': proj.color }}
+              initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              viewport={{ once: true, margin: '-80px' }}
+              transition={{ duration: 0.7, delay: i * 0.12, ease: [0.16, 1, 0.3, 1] }}
             >
-              {/* Image Container */}
-              <div className="card-image-container">
-                <div className="card-image-wrapper">
-                  <img 
-                    src={project.image} 
-                    alt={project.title}
-                    className="card-image"
-                  />
-                  <div className="image-overlay" />
-                </div>
-                
-                {/* Floating Badge */}
-                <div className="card-category" style={{ '--category-color': project.color }}>
-                  <project.icon size={14} />
-                  {project.category}
-                </div>
-
-                {/* Visit Link */}
-                <div className="card-visit">
-                  <ExternalLink size={20} />
+              <div className="project-header">
+                <span className="project-year">{proj.year}</span>
+                <div className="project-arrow">
+                  <ArrowUpRight size={18} />
                 </div>
               </div>
 
-              {/* Content */}
-              <div className="card-content">
-                <div className="card-header">
-                  <h3>{project.title}</h3>
-                  <ArrowUpRight size={20} className="arrow-icon" />
-                </div>
-                <p className="card-subtitle">{project.subtitle}</p>
-                <p className="card-description">{project.description}</p>
-                
-                <div className="card-tags">
-                  {project.tags.map((tag, i) => (
-                    <span key={i} className="tag">{tag}</span>
-                  ))}
-                </div>
+              <div className="project-content">
+                <span className="project-category">{proj.category}</span>
+                <h3 className="project-title">{proj.title}</h3>
+                <p className="project-desc">{proj.description}</p>
               </div>
 
-              {/* Glow Effect */}
-              <div className="card-glow" style={{ '--glow-color': project.color }} />
-            </motion.a>
+              <div className="project-footer">
+                <a className="project-link" href="#contact">
+                  <ExternalLink size={13} /> View Case Study
+                </a>
+              </div>
+            </motion.article>
           ))}
         </div>
-
-        {/* View All CTA */}
-        <motion.div 
-          className="portfolio-cta"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.5 }}
-        >
-          <p>Want to see more? Check out our full portfolio or start a conversation.</p>
-          <a href="#contact" className="btn btn-primary">
-            Start Your Project
-            <ArrowUpRight size={18} className="btn-icon" />
-          </a>
-        </motion.div>
       </div>
     </section>
   )

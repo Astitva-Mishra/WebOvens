@@ -1,50 +1,39 @@
 import { motion } from 'framer-motion'
-import { ArrowRight, Sparkles } from 'lucide-react'
+import { ArrowRight, Flame } from 'lucide-react'
 import './CTA.css'
 
 export default function CTA() {
     return (
-        <section className="cta" id="contact">
+        <section className="cta-section section" id="contact">
             <div className="container">
                 <motion.div
-                    className="cta-content"
-                    initial={{ opacity: 0, y: 40 }}
+                    className="cta-inner"
+                    initial={{ opacity: 0, y: 32 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.6 }}
+                    transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
                 >
-                    <span className="cta-eyebrow">
-                        <Sparkles size={16} />
-                        Ready to Start?
-                    </span>
-
-                    <h2 className="cta-headline">
-                        Ready to Build Something{' '}
-                        <span className="gradient-text">Real</span>?
+                    <div className="pill cta-pill">
+                        <Flame size={10} />  Start a Project
+                    </div>
+                    <h2 className="display-lg cta-headline">
+                        Ready to build <br />
+                        <span className="fire-text">something great?</span>
                     </h2>
-
-                    <p className="cta-subheadline">
-                        Let's turn your idea into a product that actually performs. No fluff. No wasted time. Just results.
+                    <p className="body-lg cta-desc">
+                        Tell us about your project. We'll schedule a free strategy call
+                        and outline exactly how we'd approach it.
                     </p>
-
                     <div className="cta-actions">
-                        <a href="mailto:hello@weboven.dev" className="btn btn-primary btn-large">
-                            Start Your Build
-                            <ArrowRight className="btn-icon" />
+                        <a href="mailto:webovens.in@gmail.com" className="btn btn-fire btn-lg">
+                            webovens.in@gmail.com <ArrowRight size={16} />
                         </a>
-                        <p className="cta-note">Free strategy call. No commitment required.</p>
+                        <p className="cta-note">Free strategy call. No commitment.</p>
                     </div>
                 </motion.div>
             </div>
-
-            {/* Decorative orbs */}
-            <div className="orb orb-orange cta-orb-1 animate-pulse-glow" />
-            <div className="orb orb-orange cta-orb-2 animate-pulse-glow" />
-            <div className="orb orb-dark cta-orb-3" />
-
-            {/* Hexagon decorations */}
-            <div className="hex-decoration hex-1 animate-float" />
-            <div className="hex-decoration hex-2 animate-float-slow" />
+            {/* Ambient glow */}
+            <div className="cta-glow" />
         </section>
     )
 }

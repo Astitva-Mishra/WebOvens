@@ -1,98 +1,147 @@
 .services {
-    position: relative;
-    overflow: hidden;
+    padding: 120px 0;
 }
 
-.grid-bg-overlay {
-    position: absolute;
-    inset: 0;
-    background-image:
-        linear-gradient(rgba(255, 107, 53, 0.02) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 107, 53, 0.02) 1px, transparent 1px);
-    background-size: 80px 80px;
-    pointer-events: none;
-    z-index: 0;
-}
-
-.services .container {
-    position: relative;
-    z-index: 1;
-}
-
-.services-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--space-6);
-}
-
-.service-card {
-    padding: var(--space-8);
+.section-eyebrow {
     display: flex;
     flex-direction: column;
-    gap: var(--space-4);
+    gap: 16px;
+    margin-bottom: 64px;
 }
 
-.service-icon {
-    width: 56px;
-    height: 56px;
+/* ── Stacked panels ── */
+.services-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.service-panel {
+    display: grid;
+    grid-template-columns: 120px 1fr 56px;
+    align-items: center;
+    gap: 40px;
+    padding: 40px 0;
+    border-top: 1px solid var(--border);
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: default;
+}
+
+.service-panel:last-child {
+    border-bottom: 1px solid var(--border);
+}
+
+.service-panel:hover {
+    padding-left: 24px;
+    background: linear-gradient(90deg, var(--fire-glow-sm), transparent 60%);
+}
+
+.service-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.service-num {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+}
+
+.service-icon-wrap {
+    width: 48px;
+    height: 48px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, rgba(255, 107, 53, 0.15), rgba(255, 107, 53, 0.05));
-    border-radius: var(--radius-lg);
-    color: var(--accent-primary);
+    border-radius: 14px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--fire-core);
+    transition: var(--transition);
 }
 
-.service-card h3 {
-    font-size: 1.25rem;
-    font-weight: 700;
+.service-panel:hover .service-icon-wrap {
+    background: rgba(245, 166, 35, 0.08);
+    border-color: var(--bronze-edge);
+    box-shadow: 0 0 24px var(--fire-glow-sm);
 }
 
-.service-card p {
-    color: var(--text-secondary);
-    font-size: 0.9375rem;
-    line-height: 1.6;
-    flex-grow: 1;
-}
-
-.service-features {
+.service-body {
     display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.service-title {
+    font-family: var(--font-display);
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text-pure);
+}
+
+.service-desc {
+    font-size: 15px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    max-width: 520px;
+}
+
+.service-tech {
+    display: flex;
+    gap: 8px;
     flex-wrap: wrap;
-    gap: var(--space-2);
+    margin-top: 4px;
 }
 
-.feature-tag {
-    padding: var(--space-1) var(--space-3);
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: var(--radius-sm);
-    font-size: 0.75rem;
-    font-weight: 500;
-    color: var(--text-muted);
+.tech-tag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border-radius: 999px;
+    background: rgba(245, 166, 35, 0.06);
+    border: 1px solid rgba(245, 166, 35, 0.12);
+    color: var(--fire-core);
 }
 
-.service-link {
-    display: inline-flex;
+.service-arrow {
+    display: flex;
     align-items: center;
-    gap: var(--space-2);
-    font-size: 0.875rem;
-    font-weight: 600;
-    color: var(--accent-primary);
-    margin-top: var(--space-2);
-    transition: gap var(--transition-fast);
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    transition: var(--transition);
 }
 
-.service-link:hover {
-    gap: var(--space-3);
+.service-panel:hover .service-arrow {
+    color: var(--fire-core);
+    border-color: var(--bronze-edge);
+    transform: rotate(0deg) scale(1.05);
 }
 
-@media (max-width: 1024px) {
-    .services-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (max-width: 640px) {
-    .services-grid {
+/* Responsive */
+@media (max-width: 768px) {
+    .service-panel {
         grid-template-columns: 1fr;
+        gap: 16px;
+        padding: 28px 0;
+    }
+
+    .service-left {
+        gap: 12px;
+    }
+
+    .service-arrow {
+        display: none;
+    }
+
+    .service-panel:hover {
+        padding-left: 12px;
     }
 }

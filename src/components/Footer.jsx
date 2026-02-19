@@ -1,64 +1,61 @@
-import { ArrowUpRight } from 'lucide-react'
+import logo from '/logo-new.png'
 import './Footer.css'
+import { Phone, Mail, Globe, ArrowUpRight } from 'lucide-react'
 
 export default function Footer() {
-    const currentYear = new Date().getFullYear()
+    const year = new Date().getFullYear()
 
     return (
         <footer className="footer">
             <div className="container">
-                <div className="footer-content">
+                <div className="footer-top">
+                    {/* Brand */}
                     <div className="footer-brand">
-                        <a href="#" className="logo">
-                            <img src="/logo.png" alt="WebOven" className="logo-img" />
-                            <span className="logo-text">WebOven</span>
-                        </a>
-                        <p>Engineering-first digital products. Built to perform, designed to scale.</p>
+                        <div className="footer-logo">
+                            <img src={logo} alt="WebOvens" className="footer-logo-img" />
+                            <span className="footer-logo-text">WebOvens</span>
+                        </div>
+                        <p className="footer-tagline">
+                            We build digital products<br />that leave a mark.
+                        </p>
 
-                        <div className="footer-social">
-                            <a href="https://twitter.com/weboven" target="_blank" rel="noopener noreferrer">
-                                Twitter <ArrowUpRight size={14} />
+                        {/* Real contact details from business card */}
+                        <div className="footer-contact">
+                            <a href="tel:+919119734890" className="footer-contact-row">
+                                <Phone size={13} /> +91 9119734890
                             </a>
-                            <a href="https://linkedin.com/company/weboven" target="_blank" rel="noopener noreferrer">
-                                LinkedIn <ArrowUpRight size={14} />
+                            <a href="mailto:webovens.in@gmail.com" className="footer-contact-row">
+                                <Mail size={13} /> webovens.in@gmail.com
                             </a>
-                            <a href="https://github.com/weboven" target="_blank" rel="noopener noreferrer">
-                                GitHub <ArrowUpRight size={14} />
+                            <a href="https://www.webovens.in" target="_blank" rel="noopener noreferrer" className="footer-contact-row">
+                                <Globe size={13} /> www.webovens.in
                             </a>
                         </div>
                     </div>
 
-                    <div className="footer-links">
-                        <div className="footer-column">
-                            <h4>Navigation</h4>
-                            <a href="#services">Services</a>
-                            <a href="#pricing">Pricing</a>
-                            <a href="#process">Process</a>
-                            <a href="#testimonials">Testimonials</a>
-                        </div>
-
-                        <div className="footer-column">
-                            <h4>Services</h4>
-                            <a href="#services">Web Applications</a>
+                    {/* Navigation links */}
+                    <div className="footer-cols">
+                        <div className="footer-col">
+                            <h4 className="footer-col-title">Services</h4>
+                            <a href="#services">Websites</a>
                             <a href="#services">Mobile Apps</a>
-                            <a href="#services">UI/UX Design</a>
-                            <a href="#services">E-Commerce</a>
+                            <a href="#services">Growth</a>
+                            <a href="#services">ERPs</a>
                         </div>
-
-                        <div className="footer-column">
-                            <h4>Contact</h4>
-                            <a href="mailto:hello@weboven.dev">hello@weboven.dev</a>
-                            <a href="tel:+919876543210">+91 98765 43210</a>
+                        <div className="footer-col">
+                            <h4 className="footer-col-title">Company</h4>
+                            <a href="#portfolio">Our Work</a>
+                            <a href="#pricing">Pricing</a>
+                            <a href="mailto:webovens.in@gmail.com" className="flex-footer-link">
+                                Contact Us <ArrowUpRight size={11} />
+                            </a>
                         </div>
                     </div>
                 </div>
 
                 <div className="footer-bottom">
-                    <p>&copy; {currentYear} WebOven. All rights reserved.</p>
-                    <div className="footer-legal">
-                        <a href="#">Privacy Policy</a>
-                        <a href="#">Terms of Service</a>
-                    </div>
+                    <span>© {year} WebOvens Studio. All rights reserved.</span>
+                    <span className="footer-craft">Crafted with fire.</span>
                 </div>
             </div>
         </footer>

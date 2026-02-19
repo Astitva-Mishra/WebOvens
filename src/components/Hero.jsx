@@ -1,126 +1,156 @@
-import { useRef } from 'react'
-import { Canvas, useFrame } from '@react-three/fiber'
-import { Float, MeshDistortMaterial } from '@react-three/drei'
 import { motion } from 'framer-motion'
-import { ArrowRight, Zap, Shield, Clock } from 'lucide-react'
+import { ArrowRight, Flame, Globe, Smartphone, TrendingUp, Settings } from 'lucide-react'
 import './Hero.css'
 
-function FloatingHexagon({ position, scale, color, speed }) {
-    const meshRef = useRef()
-
-    useFrame((state) => {
-        meshRef.current.rotation.x = Math.sin(state.clock.elapsedTime * speed) * 0.2
-        meshRef.current.rotation.y += 0.005
+const word = {
+    hidden: { y: '110%', rotateX: -80 },
+    show: (i) => ({
+        y: '0%',
+        rotateX: 0,
+        transition: { duration: 0.8, delay: 0.3 + i * 0.08, ease: [0.16, 1, 0.3, 1] }
     })
-
-    return (
-        <Float speed={2} rotationIntensity={0.5} floatIntensity={0.5}>
-            <mesh ref={meshRef} position={position} scale={scale}>
-                <cylinderGeometry args={[1, 1, 0.3, 6]} />
-                <MeshDistortMaterial
-                    color={color}
-                    distort={0.2}
-                    speed={2}
-                    roughness={0.4}
-                    metalness={0.8}
-                />
-            </mesh>
-        </Float>
-    )
 }
 
-function Scene3D() {
-    return (
-        <Canvas camera={{ position: [0, 0, 8], fov: 50 }}>
-            <ambientLight intensity={0.5} />
-            <pointLight position={[10, 10, 10]} intensity={1} color="#FF6B35" />
-            <pointLight position={[-10, -10, -10]} intensity={0.5} color="#FF8A50" />
-
-            <FloatingHexagon position={[3, 1, 0]} scale={1.2} color="#FF6B35" speed={0.5} />
-            <FloatingHexagon position={[-3, -1, -2]} scale={0.8} color="#C94D1B" speed={0.7} />
-            <FloatingHexagon position={[1, -2, -1]} scale={0.6} color="#FF8A50" speed={0.6} />
-            <FloatingHexagon position={[-2, 2, -3]} scale={1} color="#3D3D3D" speed={0.4} />
-        </Canvas>
-    )
+const fade = {
+    hidden: { opacity: 0, y: 20 },
+    show: (i) => ({
+        opacity: 1, y: 0,
+        transition: { duration: 0.7, delay: 1.2 + i * 0.15, ease: [0.25, 0.46, 0.45, 0.94] }
+    })
 }
+
+const pillars = [
+    { icon: Globe, label: 'Websites' },
+    { icon: Smartphone, label: 'Apps' },
+    { icon: TrendingUp, label: 'Growth' },
+    { icon: Settings, label: 'ERPs' },
+]
 
 export default function Hero() {
     return (
         <section className="hero" id="hero">
-            {/* 3D Background */}
-            <div className="hero-3d-bg">
-                <Scene3D />
-            </div>
+            <div className="hero-glow" aria-hidden />
+            <div className="hero-glow-right" aria-hidden />
 
-            {/* Gradient Orbs */}
-            <div className="orb orb-orange orb-1 animate-pulse-glow" />
-            <div className="orb orb-orange orb-2 animate-pulse-glow" />
-            <div className="orb orb-dark orb-3" />
+            <div className="container hero-layout">
+                {/* LEFT — headline block */}
+                <div className="hero-left">
+                    <motion.div
+                        className="pill hero-pill"
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.6, delay: 0.1 }}
+                    >
+                        <Flame size={10} /> Digital Engineering Studio
+                    </motion.div>
 
-            <div className="container hero-container">
-                <motion.div
-                    className="hero-content"
-                    initial={{ opacity: 0, y: 40 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                >
-                    <div className="hero-badge">
-                        <Zap size={16} />
-                        <span>Engineering-First Digital Agency</span>
-                    </div>
-
-                    <h1 className="hero-headline">
-                        We Build Products That{' '}
-                        <span className="gradient-text">Actually Work</span>
-                        <br />— Not Just Look Good.
+                    <h1 className="hero-display">
+                        {['We', 'build', 'things'].map((w, i) => (
+                            <span key={w} className="word-wrap">
+                                <motion.span
+                                    className="word"
+                                    variants={word}
+                                    initial="hidden"
+                                    animate="show"
+                                    custom={i}
+                                >{w}</motion.span>
+                            </span>
+                        ))}
+                        <br />
+                        {['the', 'web'].map((w, i) => (
+                            <span key={w} className="word-wrap">
+                                <motion.span
+                                    className="word"
+                                    variants={word}
+                                    initial="hidden"
+                                    animate="show"
+                                    custom={i + 3}
+                                >{w}</motion.span>
+                            </span>
+                        ))}
+                        <span className="word-wrap">
+                            <motion.span
+                                className="word fire-text"
+                                variants={word}
+                                initial="hidden"
+                                animate="show"
+                                custom={5}
+                            >remembers.</motion.span>
+                        </span>
                     </h1>
 
-                    <p className="hero-subheadline">
-                        Apps and websites engineered to help you launch faster, convert better, and scale without chaos. No fluff. No wasted sprints. Just real products that perform.
-                    </p>
+                    <motion.p
+                        className="hero-sub"
+                        variants={fade}
+                        initial="hidden"
+                        animate="show"
+                        custom={0}
+                    >
+                        From blazing-fast websites and mobile apps to enterprise
+                        ERPs — we forge digital products built to last.
+                    </motion.p>
 
-                    <div className="hero-ctas">
-                        <a href="#contact" className="btn btn-primary btn-large">
-                            Get Your Build Plan
-                            <ArrowRight className="btn-icon" />
+                    <motion.div
+                        className="hero-actions"
+                        variants={fade}
+                        initial="hidden"
+                        animate="show"
+                        custom={1}
+                    >
+                        <a href="#contact" className="btn btn-fire">
+                            Start Your Project <ArrowRight size={15} />
                         </a>
-                        <a href="#process" className="btn btn-secondary btn-large">
-                            View Our Process
+                        <a href="#portfolio" className="btn btn-ghost">
+                            View Our Work
                         </a>
+                    </motion.div>
+                </div>
+
+                {/* RIGHT — stats + pillars */}
+                <motion.div
+                    className="hero-right"
+                    initial={{ opacity: 0, x: 60 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 1, delay: 1.0, ease: [0.16, 1, 0.3, 1] }}
+                >
+                    <div className="hero-metric-card">
+                        <div className="metric-row">
+                            <span className="metric-num">50+</span>
+                            <span className="metric-label">Products<br />Shipped</span>
+                        </div>
+                        <div className="metric-div" />
+                        <div className="metric-row">
+                            <span className="metric-num">100%</span>
+                            <span className="metric-label">Client<br />Retention</span>
+                        </div>
+                        <div className="metric-div" />
+                        <div className="metric-row">
+                            <span className="metric-num">5★</span>
+                            <span className="metric-label">Average<br />Rating</span>
+                        </div>
                     </div>
 
-                    <div className="hero-metrics">
-                        <div className="metric">
-                            <Clock size={20} className="metric-icon" />
-                            <div className="metric-content">
-                                <span className="metric-value">14-21</span>
-                                <span className="metric-label">Days to MVP</span>
+                    <div className="hero-pillars-card">
+                        {pillars.map((p, i) => (
+                            <div key={i} className="pillar-item">
+                                <p.icon size={20} strokeWidth={1.4} className="pillar-ic" />
+                                <span className="pillar-name">{p.label}</span>
                             </div>
-                        </div>
-                        <div className="metric-divider" />
-                        <div className="metric">
-                            <Zap size={20} className="metric-icon" />
-                            <div className="metric-content">
-                                <span className="metric-value">50+</span>
-                                <span className="metric-label">Products Shipped</span>
-                            </div>
-                        </div>
-                        <div className="metric-divider" />
-                        <div className="metric">
-                            <Shield size={20} className="metric-icon" />
-                            <div className="metric-content">
-                                <span className="metric-value">100%</span>
-                                <span className="metric-label">Scope Guarantee</span>
-                            </div>
-                        </div>
+                        ))}
                     </div>
                 </motion.div>
             </div>
 
-            {/* Scroll Indicator */}
-            <div className="scroll-indicator">
+            {/* Scroll cue */}
+            <motion.div
+                className="hero-scroll"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 0.35 }}
+                transition={{ delay: 2.5, duration: 1 }}
+            >
                 <div className="scroll-line" />
-            </div>
+                <span className="label">Scroll</span>
+            </motion.div>
         </section>
     )
 }
