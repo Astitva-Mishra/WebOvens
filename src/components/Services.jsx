@@ -1,77 +1,118 @@
-import { motion } from 'framer-motion'
-import { Globe, Smartphone, TrendingUp, Settings, ArrowUpRight } from 'lucide-react'
+import { useRef } from 'react'
+import { motion, useInView } from 'framer-motion'
+import { Globe, Smartphone, TrendingUp, Settings } from 'lucide-react'
 import './Services.css'
 
 const services = [
     {
         icon: Globe,
-        num: '01',
         title: 'Websites',
-        description: 'High-performance websites on Next.js & React. Marketing sites, SaaS platforms, and e-commerce — all built for speed, SEO, and conversion.',
-        tech: ['Next.js', 'React', 'TypeScript', 'Vercel'],
+        subtitle: 'React & Next.js',
+        description: 'High-performance marketing sites, SaaS platforms, and e-commerce — built for speed, SEO, and conversion.',
+        image: '/aesthetic/service_1.png',
     },
     {
         icon: Smartphone,
-        num: '02',
-        title: 'Apps',
-        description: 'Cross-platform mobile apps using React Native. Native speed, beautiful interfaces, published on both iOS & Android app stores.',
-        tech: ['React Native', 'Expo', 'iOS', 'Android'],
+        title: 'Mobile Apps',
+        subtitle: 'React Native & Expo',
+        description: 'Cross-platform mobile apps with native speed and beautiful interfaces on both iOS & Android.',
+        image: '/aesthetic/service_2.png',
     },
     {
         icon: TrendingUp,
-        num: '03',
-        title: 'Growth',
-        description: 'Full-stack growth engineering — from SEO architecture and analytics to paid acquisition funnels that turn traffic into revenue.',
-        tech: ['SEO', 'Analytics', 'CRO', 'Performance'],
+        title: 'Growth & SEO',
+        subtitle: 'Performance Marketing',
+        description: 'Data-driven strategies that boost organic traffic, improve rankings, and accelerate user acquisition.',
+        image: '/aesthetic/service_3.png',
     },
     {
         icon: Settings,
-        num: '04',
-        title: 'ERPs',
-        description: 'Custom enterprise systems that unify your operations. Inventory, HR, billing, CRM, and reporting — all in one tailored platform.',
-        tech: ['Custom ERP', 'Automation', 'API Integration'],
+        title: 'ERPs & Platforms',
+        subtitle: 'Enterprise Systems',
+        description: 'Custom admin panels, dashboards, and internal tools — the backend infrastructure that powers your business.',
+        image: '/aesthetic/service_4.png',
+    },
+]
+
+const blocks = [
+    {
+        heading: 'Unique by design. Connected by purpose.',
+        description: 'Go further, move faster, and ship products that actually matter to the people who use them.',
+    },
+    {
+        heading: 'For projects near and far.',
+        description: 'No matter where you are, every project is designed to launch flawlessly — from MVPs to enterprise platforms.',
     },
 ]
 
 export default function Services() {
+    const ref = useRef(null)
+    const isInView = useInView(ref, { once: true, margin: '-100px' })
+
     return (
-        <section className="services section" id="services">
-            <div className="container">
-                <div className="section-eyebrow">
-                    <div className="pill">What we build</div>
-                    <h2 className="display-lg">Capabilities</h2>
+        <section className="services-section" id="services" ref={ref}>
+            <div className="services-sticky-container">
+                <motion.div
+                    className="services-heading"
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={isInView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                >
+                    <h2 className="heading-xl services-title-text">What We Build</h2>
+                </motion.div>
+
+                {/* Product Cards Grid */}
+                <div className="services-cards">
+                    {services.map((svc, i) => (
+                        <motion.a
+                            key={i}
+                            href="#contact"
+                            className="service-card"
+                            initial={{ opacity: 0, y: 50 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, margin: '-60px' }}
+                            transition={{ duration: 0.7, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                        >
+                            <div className="service-card-image">
+                                <img src={svc.image} alt={svc.title} loading="lazy" />
+                            </div>
+                            <div className="service-card-content">
+                                <div className="service-card-icon">
+                                    <svc.icon size={20} strokeWidth={1.5} />
+                                </div>
+                                <h3 className="service-card-title">{svc.title}</h3>
+                                <p className="service-card-subtitle">{svc.subtitle}</p>
+                                <p className="service-card-desc">{svc.description}</p>
+                            </div>
+                        </motion.a>
+                    ))}
                 </div>
 
-                <div className="services-stack">
-                    {services.map((svc, i) => (
+                {/* Tagline Blocks */}
+                <div className="services-blocks">
+                    {blocks.map((block, i) => (
                         <motion.div
                             key={i}
-                            className="service-panel"
-                            initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true, margin: '-50px' }}
-                            transition={{ duration: 0.6, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                            className="services-block"
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: true, margin: '-80px' }}
+                            variants={{
+                                visible: { transition: { staggerChildren: 0.1, delayChildren: i * 0.12 } }
+                            }}
                         >
-                            <div className="service-left">
-                                <span className="service-num">{svc.num}</span>
-                                <div className="service-icon-wrap">
-                                    <svc.icon size={22} strokeWidth={1.4} />
-                                </div>
-                            </div>
-
-                            <div className="service-body">
-                                <h3 className="service-title">{svc.title}</h3>
-                                <p className="service-desc">{svc.description}</p>
-                                <div className="service-tech">
-                                    {svc.tech.map(t => (
-                                        <span key={t} className="tech-tag">{t}</span>
-                                    ))}
-                                </div>
-                            </div>
-
-                            <div className="service-arrow">
-                                <ArrowUpRight size={20} />
-                            </div>
+                            <motion.p
+                                className="services-block-heading heading-md"
+                                variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } } }}
+                            >
+                                {block.heading}
+                            </motion.p>
+                            <motion.p
+                                className="services-block-desc text-md"
+                                variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } } }}
+                            >
+                                {block.description}
+                            </motion.p>
                         </motion.div>
                     ))}
                 </div>

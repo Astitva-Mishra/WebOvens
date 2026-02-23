@@ -1,27 +1,34 @@
+import './App.css'
+import SmoothScroll from './components/SmoothScroll'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
-import Marquee from './components/Marquee'
+import IntroText from './components/IntroText'
 import Services from './components/Services'
-import Portfolio from './components/Portfolio'
-import Pricing from './components/Pricing'
+import FeatureCarousel from './components/FeatureCarousel'
 import CTA from './components/CTA'
+import Editorial from './components/Editorial'
+import Portfolio from './components/Portfolio'
+import Newsletter from './components/Marquee'
 import Footer from './components/Footer'
-import './index.css'
 
 function App() {
   return (
-    <div>
-      <Navbar />
-      <main>
-        <Hero />
-        <Marquee />
-        <Services />
-        <Portfolio />
-        <Pricing />
-        <CTA />
-      </main>
-      <Footer />
-    </div>
+    <SmoothScroll>
+      <div className="app">
+        <Navbar />
+        <main>
+          <Hero />
+          <IntroText />
+          <Services />
+          <FeatureCarousel />
+          <CTA />
+          <Editorial />
+          <Portfolio />
+          <Newsletter />
+        </main>
+        <Footer />
+      </div>
+    </SmoothScroll>
   )
 }
 

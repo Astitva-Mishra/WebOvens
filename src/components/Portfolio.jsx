@@ -1,72 +1,121 @@
-import { motion } from 'framer-motion'
-import { ArrowUpRight, ExternalLink } from 'lucide-react'
+import { useRef, useState } from 'react'
+import { motion, useInView } from 'framer-motion'
+import { ArrowLeft, ArrowRight } from 'lucide-react'
 import './Portfolio.css'
 
 const projects = [
   {
-    title: 'E-Commerce Platform',
-    category: 'Website · React · Node.js',
-    description: 'Full-stack marketplace with real-time inventory, payment gateway, and 3x faster load times.',
-    color: 'rgba(245, 166, 35, 0.08)',
-    year: '2024',
+    title: 'Orderlo',
+    category: 'Full-Stack Platform',
+    date: 'Food ordering platform',
+    image: '/project-orderlo.png',
   },
   {
-    title: 'Restaurant ERP System',
-    category: 'Enterprise · React Native · Firebase',
-    description: 'End-to-end operations management — POS, KDS, inventory tracking, and multi-branch analytics.',
-    color: 'rgba(255, 107, 0, 0.06)',
-    year: '2024',
+    title: 'Ghar Ka Chulha',
+    category: 'Mobile App',
+    date: 'Home food delivery',
+    image: '/project-gharkachulha.png',
   },
   {
-    title: 'FinTech Mobile App',
-    category: 'App · React Native · AI',
-    description: 'AI-powered personal finance assistant with OCR receipt scanning and smart budget recommendations.',
-    color: 'rgba(201, 169, 110, 0.06)',
-    year: '2025',
+    title: 'Feather',
+    category: 'Landing Page',
+    date: 'SaaS Marketing',
+    image: '/project-feather-landing.png',
+  },
+  {
+    title: 'Flowstrate',
+    category: 'Web App',
+    date: 'AI Workflow Builder',
+    image: '/project-flowstrate.png',
+  },
+  {
+    title: 'Feather App',
+    category: 'Mobile App',
+    date: 'Productivity Suite',
+    image: '/project-feather-app.png',
   },
 ]
 
 export default function Portfolio() {
+  const ref = useRef(null)
+  const trackRef = useRef(null)
+  const isInView = useInView(ref, { once: true, margin: '-100px' })
+  const [pos, setPos] = useState(0)
+
+  const scroll = (dir) => {
+    if (!trackRef.current) return
+    const item = trackRef.current.children[0]
+    if (!item) return
+    const w = item.offsetWidth + 20
+    const newPos = dir === 'next'
+      ? Math.min(pos + 1, projects.length - 2)
+      : Math.max(pos - 1, 0)
+    setPos(newPos)
+    trackRef.current.scrollTo({ left: newPos * w, behavior: 'smooth' })
+  }
+
   return (
-    <section className="portfolio section" id="portfolio">
+    <section className="portfolio" id="portfolio" ref={ref}>
       <div className="container">
-        <div className="section-eyebrow">
-          <div className="pill">Selected Work</div>
-          <h2 className="display-lg">Case studies.</h2>
-        </div>
-
-        <div className="portfolio-stack">
-          {projects.map((proj, i) => (
-            <motion.article
-              key={i}
-              className="project-card"
-              style={{ '--card-glow': proj.color }}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-80px' }}
-              transition={{ duration: 0.7, delay: i * 0.12, ease: [0.16, 1, 0.3, 1] }}
+        <motion.div
+          className="portfolio-header"
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+          variants={{
+            visible: { transition: { staggerChildren: 0.15 } }
+          }}
+        >
+          <div>
+            <motion.span
+              className="text-eyebrow portfolio-eyebrow"
+              variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } } }}
             >
-              <div className="project-header">
-                <span className="project-year">{proj.year}</span>
-                <div className="project-arrow">
-                  <ArrowUpRight size={18} />
-                </div>
-              </div>
+              Portfolio
+            </motion.span>
+            <motion.h2
+              className="heading-xl portfolio-heading"
+              variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } } }}
+            >
+              Our Work
+            </motion.h2>
+          </div>
+          <motion.nav
+            className="portfolio-nav"
+            variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } } }}
+          >
+            <button className="btn-icon btn-grey" onClick={() => scroll('prev')} aria-label="Previous">
+              <ArrowLeft size={18} />
+            </button>
+            <button className="btn-icon btn-grey" onClick={() => scroll('next')} aria-label="Next">
+              <ArrowRight size={18} />
+            </button>
+          </motion.nav>
+        </motion.div>
+      </div>
 
-              <div className="project-content">
-                <span className="project-category">{proj.category}</span>
-                <h3 className="project-title">{proj.title}</h3>
-                <p className="project-desc">{proj.description}</p>
+      <div className="portfolio-track" ref={trackRef}>
+        {projects.map((project, i) => (
+          <motion.article
+            key={i}
+            className="portfolio-card"
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <div className="portfolio-card-image">
+              <img src={project.image} alt={project.title} className="img-cover" loading="lazy" />
+            </div>
+            <div className="portfolio-card-info">
+              <h3 className="heading-xs portfolio-card-title">{project.title}</h3>
+              <div className="portfolio-card-meta">
+                <span className="text-sm">{project.category}</span>
+                <span className="portfolio-card-dot" />
+                <span className="text-sm" style={{ color: 'var(--text-muted)' }}>{project.date}</span>
               </div>
-
-              <div className="project-footer">
-                <a className="project-link" href="#contact">
-                  <ExternalLink size={13} /> View Case Study
-                </a>
-              </div>
-            </motion.article>
-          ))}
-        </div>
+            </div>
+          </motion.article>
+        ))}
       </div>
     </section>
   )
