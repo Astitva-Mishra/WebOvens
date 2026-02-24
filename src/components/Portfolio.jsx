@@ -1,58 +1,49 @@
-import { useRef, useState } from 'react'
+import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
-import { ArrowLeft, ArrowRight } from 'lucide-react'
+import { ArrowUpRight } from 'lucide-react'
 import './Portfolio.css'
 
 const projects = [
   {
     title: 'Orderlo',
     category: 'Full-Stack Platform',
-    date: 'Food ordering platform',
+    tag: 'Food Ordering',
     image: '/project-orderlo.png',
+    size: 'large',
   },
   {
     title: 'Ghar Ka Chulha',
     category: 'Mobile App',
-    date: 'Home food delivery',
+    tag: 'Home Food Delivery',
     image: '/project-gharkachulha.png',
+    size: 'medium',
   },
   {
     title: 'Feather',
     category: 'Landing Page',
-    date: 'SaaS Marketing',
+    tag: 'SaaS Marketing',
     image: '/project-feather-landing.png',
+    size: 'medium',
   },
   {
     title: 'Flowstrate',
     category: 'Web App',
-    date: 'AI Workflow Builder',
+    tag: 'AI Workflow Builder',
     image: '/project-flowstrate.png',
+    size: 'large',
   },
   {
     title: 'Feather App',
     category: 'Mobile App',
-    date: 'Productivity Suite',
+    tag: 'Productivity Suite',
     image: '/project-feather-app.png',
+    size: 'full',
   },
 ]
 
 export default function Portfolio() {
   const ref = useRef(null)
-  const trackRef = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-100px' })
-  const [pos, setPos] = useState(0)
-
-  const scroll = (dir) => {
-    if (!trackRef.current) return
-    const item = trackRef.current.children[0]
-    if (!item) return
-    const w = item.offsetWidth + 20
-    const newPos = dir === 'next'
-      ? Math.min(pos + 1, projects.length - 2)
-      : Math.max(pos - 1, 0)
-    setPos(newPos)
-    trackRef.current.scrollTo({ left: newPos * w, behavior: 'smooth' })
-  }
 
   return (
     <section className="portfolio" id="portfolio" ref={ref}>
@@ -70,7 +61,7 @@ export default function Portfolio() {
               className="text-eyebrow portfolio-eyebrow"
               variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } } }}
             >
-              Portfolio
+              Selected Work
             </motion.span>
             <motion.h2
               className="heading-xl portfolio-heading"
@@ -79,43 +70,44 @@ export default function Portfolio() {
               Our Work
             </motion.h2>
           </div>
-          <motion.nav
-            className="portfolio-nav"
+          <motion.a
+            href="#contact"
+            className="btn btn-primary portfolio-cta"
             variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } } }}
           >
-            <button className="btn-icon btn-grey" onClick={() => scroll('prev')} aria-label="Previous">
-              <ArrowLeft size={18} />
-            </button>
-            <button className="btn-icon btn-grey" onClick={() => scroll('next')} aria-label="Next">
-              <ArrowRight size={18} />
-            </button>
-          </motion.nav>
+            View All Projects
+          </motion.a>
         </motion.div>
       </div>
 
-      <div className="portfolio-track" ref={trackRef}>
-        {projects.map((project, i) => (
-          <motion.article
-            key={i}
-            className="portfolio-card"
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <div className="portfolio-card-image">
-              <img src={project.image} alt={project.title} className="img-cover" loading="lazy" />
-            </div>
-            <div className="portfolio-card-info">
-              <h3 className="heading-xs portfolio-card-title">{project.title}</h3>
-              <div className="portfolio-card-meta">
-                <span className="text-sm">{project.category}</span>
-                <span className="portfolio-card-dot" />
-                <span className="text-sm" style={{ color: 'var(--text-muted)' }}>{project.date}</span>
+      {/* Bento Grid */}
+      <div className="container">
+        <div className="portfolio-bento">
+          {projects.map((project, i) => (
+            <motion.article
+              key={i}
+              className={`portfolio-card portfolio-card--${project.size}`}
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-80px' }}
+              transition={{ duration: 0.7, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <div className="portfolio-card-image">
+                <img src={project.image} alt={project.title} loading="lazy" />
               </div>
-            </div>
-          </motion.article>
-        ))}
+              <div className="portfolio-card-overlay">
+                <div className="portfolio-card-info">
+                  <span className="portfolio-card-tag">{project.tag}</span>
+                  <h3 className="portfolio-card-title">{project.title}</h3>
+                  <span className="portfolio-card-category">{project.category}</span>
+                </div>
+                <div className="portfolio-card-arrow">
+                  <ArrowUpRight size={20} strokeWidth={1.5} />
+                </div>
+              </div>
+            </motion.article>
+          ))}
+        </div>
       </div>
     </section>
   )

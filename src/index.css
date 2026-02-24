@@ -21,16 +21,16 @@
   --text-white: #FFFFFF;
   --text-white-muted: rgba(255, 255, 255, 0.5);
 
-  /* Accent — Amber/Gold from logo flame */
-  --accent: #D4A24C;
-  --accent-hover: #E8B85E;
-  --accent-hot: #E8863A;
-  --accent-glow: rgba(212, 162, 76, 0.15);
+  /* Accent — Cold Forge Icy Cyan */
+  --accent: #00E5FF;
+  --accent-hover: #33EBFF;
+  --accent-hot: #00B8D4;
+  --accent-glow: rgba(0, 229, 255, 0.15);
 
   /* Borders */
   --border: rgba(255, 255, 255, 0.06);
   --border-medium: rgba(255, 255, 255, 0.1);
-  --border-warm: rgba(212, 162, 76, 0.12);
+  --border-warm: rgba(0, 229, 255, 0.12);
 
   /* Typography */
   --font-display: 'Outfit', -apple-system, sans-serif;
@@ -62,6 +62,15 @@
 html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  scrollbar-width: none;
+  /* Firefox */
+  -ms-overflow-style: none;
+  /* Edge */
+}
+
+html::-webkit-scrollbar {
+  display: none;
+  /* Chrome, Safari */
 }
 
 html.lenis,

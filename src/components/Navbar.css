@@ -155,12 +155,28 @@
     left: 50%;
     transform: translateX(-50%);
     z-index: 10;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 .navbar-logo-img {
-    height: 36px;
+    height: 32px;
     width: auto;
     transition: filter 0.5s ease;
+}
+
+.navbar-logo-text {
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    transition: color 0.5s ease;
+}
+
+.navbar--hero .navbar-logo-text {
+    color: white;
 }
 
 .navbar-right {

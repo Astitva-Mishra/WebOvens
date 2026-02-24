@@ -1,5 +1,5 @@
 .pricing {
-    background: var(--void);
+    background: #000;
 }
 
 .pricing-grid {
@@ -17,15 +17,15 @@
     position: relative;
     border-radius: 24px;
     border: 1px solid var(--border);
-    background: var(--surface);
+    background: var(--bg-card);
 }
 
 .pricing-card--highlight {
-    border-color: var(--bronze-edge) !important;
-    background: var(--metal);
-    box-shadow: 0 0 0 1px var(--bronze-edge),
-        0 0 60px var(--fire-glow),
-        inset 0 1px 0 rgba(245, 166, 35, 0.12);
+    border-color: var(--accent) !important;
+    background: var(--bg-light);
+    box-shadow: 0 0 0 1px var(--accent),
+        0 0 60px var(--accent-glow),
+        inset 0 1px 0 rgba(0, 229, 255, 0.12);
 }
 
 .pricing-popular-badge {
@@ -33,7 +33,7 @@
     top: -14px;
     left: 50%;
     transform: translateX(-50%);
-    background: var(--fire-core);
+    background: var(--accent);
     color: #000;
     font-family: 'Fira Code', monospace;
     font-size: 10px;
@@ -56,7 +56,7 @@
     font-size: 11px;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: var(--fire-core);
+    color: var(--accent);
 }
 
 .pricing-price {
@@ -102,7 +102,7 @@
 }
 
 .pricing-check {
-    color: var(--fire-core);
+    color: var(--accent);
     flex-shrink: 0;
 }
 

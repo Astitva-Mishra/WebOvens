@@ -10,7 +10,7 @@
     left: 0;
     right: 0;
     height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(255, 107, 53, 0.3), transparent);
+    background: linear-gradient(90deg, transparent, rgba(0, 229, 255, 0.3), transparent);
 }
 
 .problem-content {
