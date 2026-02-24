@@ -18,7 +18,6 @@ export default function Newsletter() {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        // Handle newsletter signup
         setEmail('')
     }
 
@@ -32,12 +31,12 @@ export default function Newsletter() {
                     animate={isInView ? { opacity: 1, y: 0 } : {}}
                     transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                 >
-                    <span className="text-eyebrow newsletter-eyebrow">Stay Connected</span>
+                    <span className="text-eyebrow newsletter-eyebrow">Stay in the loop</span>
                     <h2 className="heading-lg newsletter-heading">
-                        Get updates on our<br />latest work.
+                        Get notified when<br />we ship.
                     </h2>
                     <p className="text-md newsletter-desc">
-                        No spam, no noise. Just updates on new projects, insights, and the occasional behind-the-scenes.
+                        No spam. No fluff. Just real updates when we launch something worth seeing.
                     </p>
                     <form className="newsletter-form" onSubmit={handleSubmit}>
                         <div className="newsletter-input-wrap">

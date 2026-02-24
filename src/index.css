@@ -1,30 +1,36 @@
 /* ============================================================
-   WebOvens — Lightship-Inspired Clean Light Theme
-   Brand: Off-white + Black + Warm accents
+   WebOvens — Dark Forge Theme
+   Brand: Obsidian + Amber/Gold + Premium Dark
+   Extracted from hexagonal flame logo DNA
    ============================================================ */
 
 :root {
   /* Surfaces */
-  --bg-primary: #F4F4F4;
-  --bg-white: #FFFFFF;
-  --bg-light: #EBEBEB;
-  --bg-dark: #1A1A1A;
-  --bg-pattern: #E8E8E8;
+  --bg-primary: #0A0A0A;
+  --bg-white: #111111;
+  --bg-light: #1A1A1A;
+  --bg-dark: #000000;
+  --bg-pattern: #141414;
+  --bg-card: #141414;
+  --bg-elevated: #1E1E1E;
 
   /* Text */
-  --text-primary: #000000;
-  --text-secondary: rgba(0, 0, 0, 0.5);
-  --text-muted: rgba(0, 0, 0, 0.3);
+  --text-primary: #F5F5F7;
+  --text-secondary: rgba(245, 245, 247, 0.6);
+  --text-muted: rgba(245, 245, 247, 0.35);
   --text-white: #FFFFFF;
   --text-white-muted: rgba(255, 255, 255, 0.5);
 
-  /* Accent */
-  --accent: #E63946;
-  --accent-hover: #D62839;
+  /* Accent — Amber/Gold from logo flame */
+  --accent: #D4A24C;
+  --accent-hover: #E8B85E;
+  --accent-hot: #E8863A;
+  --accent-glow: rgba(212, 162, 76, 0.15);
 
   /* Borders */
-  --border: rgba(0, 0, 0, 0.08);
-  --border-medium: rgba(0, 0, 0, 0.15);
+  --border: rgba(255, 255, 255, 0.06);
+  --border-medium: rgba(255, 255, 255, 0.1);
+  --border-warm: rgba(212, 162, 76, 0.12);
 
   /* Typography */
   --font-display: 'Outfit', -apple-system, sans-serif;
@@ -170,6 +176,7 @@ body {
   font-weight: 500;
   letter-spacing: 0.15em;
   text-transform: uppercase;
+  color: var(--accent);
 }
 
 .text-lg {
@@ -212,37 +219,38 @@ body {
 }
 
 .btn-primary {
-  background: var(--text-primary);
-  color: var(--text-white);
+  background: var(--accent);
+  color: #0A0A0A;
 }
 
 .btn-primary:hover {
-  background: #333;
+  background: var(--accent-hover);
   transform: scale(1.02);
 }
 
 .btn-grey {
   background: var(--bg-light);
   color: var(--text-primary);
-  border: 1px solid var(--border);
+  border: 1px solid var(--border-medium);
 }
 
 .btn-grey:hover {
-  background: #ddd;
+  background: var(--bg-elevated);
 }
 
 .btn-blur {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   color: var(--text-white);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   padding: 18px 36px;
   font-size: 16px;
 }
 
 .btn-blur:hover {
-  background: rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.15);
+  border-color: var(--accent);
 }
 
 .btn-icon {
@@ -283,7 +291,7 @@ body {
 
 /* ── Pattern Background ── */
 .pattern-bg {
-  background-image: radial-gradient(circle at 1px 1px, rgba(0, 0, 0, 0.06) 1px, transparent 0);
+  background-image: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.04) 1px, transparent 0);
   background-size: 24px 24px;
 }
 
@@ -300,7 +308,7 @@ body {
   left: 0;
   width: 0;
   height: 1px;
-  background: currentColor;
+  background: var(--accent);
   transition: width 0.3s var(--ease-out);
 }
 
@@ -336,6 +344,19 @@ body {
 .split-char.is-visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* ── Screen reader only ── */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 /* ── Responsive helpers ── */

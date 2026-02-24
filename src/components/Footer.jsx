@@ -1,6 +1,6 @@
 import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
-import { ArrowUpRight, Linkedin, Github, Twitter, Instagram, Code2, Zap } from 'lucide-react'
+import { ArrowUpRight, Linkedin, Github, Twitter, Instagram, Code2, Flame } from 'lucide-react'
 import './Footer.css'
 
 const services = [
@@ -39,12 +39,12 @@ export default function Footer() {
                     animate={isInView ? { opacity: 1, y: 0 } : {}}
                     transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                 >
-                    <Zap size={48} strokeWidth={1} className="footer-symbol" />
+                    <Flame size={48} strokeWidth={1} className="footer-symbol" />
                     <h3 className="heading-md footer-tagline">
-                        Products that launch fast, convert better,<br />and scale without chaos.
+                        Better products. Faster launches.<br />No chaos.
                     </h3>
                     <p className="text-md footer-desc">
-                        We partner with startups and enterprises to build digital products that actually work—from concept to production.
+                        We partner with ambitious teams to build digital products that win — from first line of code to production.
                     </p>
                 </motion.div>
 
@@ -103,7 +103,7 @@ export default function Footer() {
                         © {new Date().getFullYear()} WebOvens. All rights reserved.
                     </span>
                     <span className="text-xs footer-credit">
-                        Crafted with <Code2 size={12} style={{ display: 'inline', verticalAlign: 'middle' }} /> + obsession
+                        Forged with <Code2 size={12} style={{ display: 'inline', verticalAlign: 'middle' }} /> + obsession
                     </span>
                 </div>
             </div>

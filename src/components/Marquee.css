@@ -1,6 +1,6 @@
 .newsletter {
     padding: var(--fluid-2xl) 0;
-    background: var(--bg-white);
+    overflow: hidden;
 }
 
 .newsletter-inner {
@@ -18,12 +18,16 @@
 }
 
 .newsletter-eyebrow {
-    color: var(--text-muted);
+    color: var(--accent);
+}
+
+.newsletter-heading {
+    color: var(--text-primary);
 }
 
 .newsletter-desc {
     color: var(--text-secondary);
-    max-width: 420px;
+    max-width: 440px;
 }
 
 .newsletter-form {
@@ -33,38 +37,38 @@
 }
 
 .newsletter-input-wrap {
-    flex: 1;
-    position: relative;
     display: flex;
     align-items: center;
+    gap: 12px;
+    background: var(--bg-light);
+    border: 1px solid var(--border-medium);
+    border-radius: 100px;
+    padding: 14px 20px;
+    flex: 1;
+    transition: border-color 0.3s ease;
+}
+
+.newsletter-input-wrap:focus-within {
+    border-color: var(--accent);
 }
 
 .newsletter-input-icon {
-    position: absolute;
-    left: 16px;
     color: var(--text-muted);
-    pointer-events: none;
+    flex-shrink: 0;
 }
 
 .newsletter-input {
-    width: 100%;
-    padding: 14px 16px 14px 44px;
-    border-radius: 100px;
-    border: 1px solid var(--border-medium);
-    background: var(--bg-primary);
+    background: none;
+    border: none;
+    outline: none;
     font-family: var(--font-body);
     font-size: 14px;
     color: var(--text-primary);
-    outline: none;
-    transition: border-color 0.3s ease;
+    width: 100%;
 }
 
 .newsletter-input::placeholder {
     color: var(--text-muted);
-}
-
-.newsletter-input:focus {
-    border-color: var(--text-primary);
 }
 
 .newsletter-submit {
@@ -73,16 +77,15 @@
 
 /* ── Image Side ── */
 .newsletter-image-side {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    position: relative;
 }
 
 .newsletter-image-wrapper {
     width: 100%;
-    aspect-ratio: 4 / 3;
-    border-radius: 10px;
+    aspect-ratio: 4 / 5;
+    border-radius: 24px;
     overflow: hidden;
+    border: 1px solid var(--border);
 }
 
 .newsletter-image-inner {

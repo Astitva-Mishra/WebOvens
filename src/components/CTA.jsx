@@ -36,7 +36,7 @@ export default function CTA() {
                     transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
                 >
                     <Sparkles size={28} strokeWidth={1.2} className="cta-icon" />
-                    <h2 className="heading-xl cta-heading">Experience the<br />WebOvens Difference.</h2>
+                    <h2 className="heading-xl cta-heading">Ready to build your<br />unfair advantage?</h2>
                     <a href="#contact" className="btn btn-blur cta-btn">
                         Start a Project
                         <ArrowRight size={18} />

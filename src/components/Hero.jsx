@@ -108,7 +108,7 @@ export default function Hero() {
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1], delay: 0.6 }}
                             >
-                                Extraordinary digital products that outpace the competition.
+                                Digital products that give you an unfair advantage.
                             </motion.p>
                         </motion.div>
 

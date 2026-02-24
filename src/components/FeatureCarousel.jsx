@@ -5,21 +5,21 @@ import './FeatureCarousel.css'
 
 const features = [
     {
-        eyebrow: 'Full-Stack Engineering',
-        title: 'End-to-End, From Day One.',
-        description: 'We handle everything — frontend, backend, databases, APIs, deployment, and CI/CD. You get one team that owns the full stack, not a chain of handoffs.',
+        eyebrow: 'End-to-End Ownership',
+        title: 'One team owns everything.',
+        description: 'Frontend, backend, database, deployment, CI/CD — we own the entire stack. No handoffs. No miscommunication. One team that ships.',
         image: '/aesthetic/feature_1.png',
     },
     {
-        eyebrow: 'Ship Fast. Scale Later.',
-        title: 'Speed Without Compromise.',
-        description: 'We launch MVPs in weeks, not months. But fast doesn\'t mean fragile — every product is built on a clean architecture that scales when you need it to.',
+        eyebrow: 'Speed to Market',
+        title: 'Launch in weeks. Scale when ready.',
+        description: 'We ship MVPs in weeks, not quarters. But fast doesn\'t mean fragile — every product is built on clean architecture that scales when you need it to.',
         image: '/aesthetic/feature_2.png',
     },
     {
-        eyebrow: 'Design + Engineering',
-        title: 'Beautiful Products That Work.',
-        description: 'We combine design thinking with engineering precision. Every pixel is intentional, every interaction is smooth, and every product tells a story.',
+        eyebrow: 'Pixel-Perfect Engineering',
+        title: 'Design that converts. Code that scales.',
+        description: 'We combine design thinking with engineering precision. Every pixel is intentional, every interaction is smooth, and every product drives results.',
         image: '/aesthetic/feature_3.png',
     },
 ]
@@ -61,11 +61,11 @@ export default function FeatureCarousel() {
                         className="heading-xl"
                         variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } } }}
                     >
-                        Why WebOvens.
+                        The WebOvens advantage.
                     </motion.h2>
                     <motion.a
                         href="#contact"
-                        className="btn btn-grey"
+                        className="btn btn-primary"
                         variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } } }}
                     >
                         Get in Touch
@@ -152,7 +152,7 @@ export default function FeatureCarousel() {
                         <button className="btn-icon feature-modal-close" onClick={() => setActiveDetail(null)}>
                             <X size={18} />
                         </button>
-                        <span className="text-eyebrow" style={{ opacity: 0.5 }}>
+                        <span className="text-eyebrow">
                             {features[activeDetail].eyebrow}
                         </span>
                         <h2 className="heading-md">{features[activeDetail].title}</h2>

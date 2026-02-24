@@ -26,7 +26,7 @@ export default function Editorial() {
                     transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                 >
                     <p className="heading-2xl editorial-paragraph">
-                        We are a team of engineers and designers who build production-grade digital products. From marketing sites and mobile apps to full-scale platforms, every product is built for speed, scale, and lasting quality.
+                        We're a precision engineering studio. We take your vision from whiteboard to production — and we don't stop until it's extraordinary.
                     </p>
                 </motion.div>
 
@@ -51,13 +51,13 @@ export default function Editorial() {
                             className="heading-md editorial-split-heading"
                             variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } } }}
                         >
-                            We don't make promises.<br />We ship products.
+                            Less talk.<br />More shipping.
                         </motion.h3>
                         <motion.p
                             className="text-md editorial-desc"
                             variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } } }}
                         >
-                            Every project begins with a deep understanding of your goals. We combine rigorous engineering practices with intentional design to create products your users will love and your team can maintain.
+                            Every dollar you invest goes into engineering and design — not overhead, not management layers. Direct access to the people building your product.
                         </motion.p>
                         <motion.a
                             href="#contact"

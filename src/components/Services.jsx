@@ -8,40 +8,40 @@ const services = [
         icon: Globe,
         title: 'Websites',
         subtitle: 'React & Next.js',
-        description: 'High-performance marketing sites, SaaS platforms, and e-commerce — built for speed, SEO, and conversion.',
+        description: 'Lightning-fast sites engineered to convert visitors into customers. Built on React & Next.js.',
         image: '/aesthetic/service_1.png',
     },
     {
         icon: Smartphone,
         title: 'Mobile Apps',
         subtitle: 'React Native & Expo',
-        description: 'Cross-platform mobile apps with native speed and beautiful interfaces on both iOS & Android.',
+        description: 'One codebase. Two platforms. Native performance your users can feel.',
         image: '/aesthetic/service_2.png',
     },
     {
         icon: TrendingUp,
         title: 'Growth & SEO',
         subtitle: 'Performance Marketing',
-        description: 'Data-driven strategies that boost organic traffic, improve rankings, and accelerate user acquisition.',
+        description: 'The traffic engine behind your growth. SEO, analytics, and performance marketing that compounds.',
         image: '/aesthetic/service_3.png',
     },
     {
         icon: Settings,
         title: 'ERPs & Platforms',
         subtitle: 'Enterprise Systems',
-        description: 'Custom admin panels, dashboards, and internal tools — the backend infrastructure that powers your business.',
+        description: 'The operational backbone your business runs on. Dashboards, ERPs, and internal tools built to last.',
         image: '/aesthetic/service_4.png',
     },
 ]
 
 const blocks = [
     {
-        heading: 'Unique by design. Connected by purpose.',
+        heading: 'Built different. Shipped faster.',
         description: 'Go further, move faster, and ship products that actually matter to the people who use them.',
     },
     {
-        heading: 'For projects near and far.',
-        description: 'No matter where you are, every project is designed to launch flawlessly — from MVPs to enterprise platforms.',
+        heading: 'From MVP to enterprise. Without switching teams.',
+        description: 'One team takes you from first line of code to production — and stays with you as you scale.',
     },
 ]
 

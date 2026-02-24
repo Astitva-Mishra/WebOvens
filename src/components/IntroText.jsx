@@ -2,7 +2,7 @@ import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import './IntroText.css'
 
-const text = "Engineering-first, design-obsessed and adventure-ready."
+const text = "One team. Full stack. Zero handoffs. Products that ship."
 
 export default function IntroText() {
     const ref = useRef(null)
