@@ -1,110 +1,355 @@
-.portfolio {
-    padding: var(--fluid-2xl) 0;
+/* ════════════════════════════════════════════
+   Portfolio Section — Premium Dark Interactive
+   ════════════════════════════════════════════ */
+
+/* ── Section wrapper ── */
+.pf-section {
+  position: relative;
+  padding: clamp(2.5rem, 5vw, 4.5rem) 0 clamp(3rem, 6vw, 5.5rem);
+  background: #0c0c0f;
+  overflow: hidden;
 }
 
-.portfolio-header {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    margin-bottom: var(--fluid-md);
+/* ── Header ── */
+.pf-header {
+  padding: 0 clamp(24px, 5vw, 80px);
+  margin-bottom: clamp(2rem, 4vw, 3rem);
 }
 
-.portfolio-eyebrow {
-    color: var(--accent);
-    display: block;
-    margin-bottom: 8px;
+.pf-eyebrow {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #e8363a;
+  margin-bottom: 14px;
 }
 
-.portfolio-heading {
-    font-size: clamp(2.5rem, 5vw, 4rem);
+.pf-heading {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 3.8vw, 3.25rem);
+  font-weight: 800;
+  line-height: 1.0;
+  letter-spacing: -0.03em;
+  color: #f5f5f7;
 }
 
-.portfolio-nav {
-    display: flex;
-    gap: 8px;
+/* ── Scroll track ── */
+.pf-track {
+  display: flex;
+  gap: 16px;
+  padding: 30px clamp(24px, 5vw, 80px) 44px;
+  overflow-x: scroll;
+  overflow-y: visible;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  cursor: grab;
+  -webkit-overflow-scrolling: touch;
+  user-select: none;
+  perspective: 1000px;
 }
 
-/* ── Track ── */
-.portfolio-track {
-    display: flex;
-    gap: 20px;
-    padding: 0 clamp(24px, 5vw, 72px);
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
+.pf-track::-webkit-scrollbar {
+  display: none;
 }
 
-.portfolio-track::-webkit-scrollbar {
-    display: none;
+/* ── Each card ── */
+.pf-card {
+  flex: 0 0 clamp(380px, 46vw, 700px);
+  /* Height by aspect ratio — fluid, no hard heights */
+  aspect-ratio: 16 / 10;
+  border-radius: 18px;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  will-change: transform;
+  transform-style: preserve-3d;
+  box-shadow:
+    0 20px 55px rgba(0, 0, 0, 0.5),
+    0 6px 16px rgba(0, 0, 0, 0.3),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+  transition:
+    box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  outline: none;
 }
 
-/* ── Card ── */
-.portfolio-card {
-    flex: 0 0 calc(33.333% - 14px);
-    min-width: 280px;
-    scroll-snap-align: start;
-    cursor: pointer;
-    transition: transform 0.5s var(--ease-out);
+.pf-card:hover {
+  box-shadow:
+    0 36px 80px rgba(0, 0, 0, 0.65),
+    0 12px 32px rgba(0, 0, 0, 0.4),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.09);
 }
 
-.portfolio-card:hover {
-    transform: translateY(-4px);
+/* ── Card image container ── */
+.pf-card-image-wrap {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+  border-radius: inherit;
 }
 
-.portfolio-card-image {
-    width: 100%;
-    aspect-ratio: 4 / 5;
-    border-radius: 24px;
-    overflow: hidden;
-    background: var(--bg-light);
-    margin-bottom: 24px;
-    border: 1px solid var(--border);
-    transition: border-color 0.4s ease;
+.pf-card-img {
+  width: 100%;
+  height: 110%;
+  object-fit: cover;
+  display: block;
+  will-change: transform;
+  pointer-events: none;
+  transform-origin: center center;
+  /* base transform that JS will override via inline style */
+  transform: translate(0px, 0px) scale(1.08);
+  transition: none;
+  /* JS drives this */
 }
 
-.portfolio-card:hover .portfolio-card-image {
-    border-color: var(--border-warm);
+/* Subtle shimmer overlay on hover */
+.pf-card-shimmer {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg,
+      rgba(255, 255, 255, 0.04) 0%,
+      transparent 50%,
+      rgba(0, 0, 0, 0.15) 100%);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s ease;
 }
 
-.portfolio-card-image img {
-    transition: transform 0.6s var(--ease-out);
+.pf-card:hover .pf-card-shimmer {
+  opacity: 1;
 }
 
-.portfolio-card:hover .portfolio-card-image img {
-    transform: scale(1.04);
+/* ── Edge fades ── */
+.pf-fade-left,
+.pf-fade-right {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: clamp(40px, 5vw, 100px);
+  pointer-events: none;
+  z-index: 10;
 }
 
-.portfolio-card-info {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
+.pf-fade-left {
+  left: 0;
+  background: linear-gradient(to right, #0c0c0f 0%, transparent 100%);
 }
 
-.portfolio-card-meta {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: var(--text-secondary);
+.pf-fade-right {
+  right: 0;
+  background: linear-gradient(to left, #0c0c0f 0%, transparent 100%);
 }
 
-.portfolio-card-dot {
-    width: 3px;
-    height: 3px;
-    border-radius: 50%;
-    background: var(--text-muted);
+/* ════════════════════════════════════════════
+   Project View — Cinematic Full Screen
+   ════════════════════════════════════════════ */
+
+.pv-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.12) transparent;
+
+  /* Entry: start clipped + scaled down */
+  opacity: 0;
+  transform: scale(0.97) translateY(24px);
+  transition:
+    opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+.pv-overlay.pv-visible {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+  pointer-events: all;
+}
+
+/* ── Hero (60 vh) ── */
+.pv-hero {
+  position: relative;
+  height: 60vh;
+  min-height: 420px;
+  background-size: cover;
+  background-position: center;
+  flex-shrink: 0;
+}
+
+.pv-hero-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom,
+      rgba(0, 0, 0, 0.25) 0%,
+      rgba(0, 0, 0, 0.5) 50%,
+      rgba(10, 10, 13, 0.95) 100%);
+}
+
+.pv-hero-content {
+  position: absolute;
+  bottom: clamp(32px, 5vw, 60px);
+  left: clamp(32px, 6vw, 90px);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.pv-tag {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #e8363a;
+}
+
+.pv-year {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.45);
+  letter-spacing: 0.08em;
+}
+
+.pv-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 5vw, 5rem);
+  font-weight: 800;
+  line-height: 1.0;
+  letter-spacing: -0.035em;
+  color: #ffffff;
+  text-shadow: 0 4px 40px rgba(0, 0, 0, 0.5);
+}
+
+/* ── Close button ── */
+.pv-close {
+  position: fixed;
+  top: 28px;
+  right: 32px;
+  z-index: 1010;
+  background: rgba(232, 54, 58, 0.15);
+  border: 1px solid rgba(232, 54, 58, 0.5);
+  color: #e8363a;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  padding: 10px 18px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition:
+    background 0.3s ease,
+    border-color 0.3s ease,
+    color 0.3s ease,
+    transform 0.2s ease;
+}
+
+.pv-close:hover {
+  background: rgba(232, 54, 58, 0.3);
+  border-color: #e8363a;
+  color: #ffffff;
+  transform: scale(1.05);
+}
+
+/* ── Body ── */
+.pv-body {
+  background: #0a0a0d;
+  flex: 1;
+  padding: clamp(3rem, 6vw, 5rem) 0 clamp(5rem, 10vw, 8rem);
+}
+
+.pv-body-inner {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 clamp(32px, 6vw, 90px);
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
+}
+
+.pv-description {
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 1.5vw, 1.2rem);
+  line-height: 1.75;
+  color: rgba(245, 245, 247, 0.7);
+  font-weight: 400;
+}
+
+/* ── Technologies ── */
+.pv-tech-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.pv-tech-label {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.pv-tech-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.pv-tech-item {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(245, 245, 247, 0.75);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 8px 18px;
+  border-radius: 100px;
+  letter-spacing: 0.02em;
+  transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+}
+
+.pv-tech-item:hover {
+  background: rgba(232, 54, 58, 0.1);
+  border-color: rgba(232, 54, 58, 0.35);
+  color: #f5f5f7;
 }
 
 /* ── Responsive ── */
 @media (max-width: 768px) {
-    .portfolio-card {
-        flex: 0 0 75%;
-    }
+  .pf-card {
+    flex: 0 0 85vw;
+    aspect-ratio: 16 / 10;
+    border-radius: 14px;
+  }
 
-    .portfolio-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 20px;
-    }
+  .pf-track {
+    padding: 28px 16px 44px;
+    gap: 14px;
+  }
+
+  .pf-heading {
+    font-size: clamp(1.75rem, 6vw, 2.5rem);
+  }
+
+  .pv-hero {
+    height: 48vh;
+  }
+
+  .pv-title {
+    font-size: clamp(1.75rem, 7vw, 2.75rem);
+  }
+
+  .pv-close {
+    top: 14px;
+    right: 14px;
+  }
 }
