@@ -14,6 +14,7 @@ const PROJECTS = [
       'A high-performance food ordering platform built for speed and scale. Features real-time order tracking, restaurant dashboards, and AI-powered menu recommendations — serving thousands of daily active users.',
     technologies: ['React', 'Node.js', 'PostgreSQL', 'Redis', 'Stripe', 'Socket.io'],
     image: '/project-orderlo.png',
+    size: 'large',
   },
   {
     id: 2,
@@ -24,6 +25,7 @@ const PROJECTS = [
       'Connecting home cooks with food lovers in their neighbourhood. A hyper-local platform that empowers home chefs to monetize their culinary skills with beautiful UX and seamless logistics.',
     technologies: ['React Native', 'Firebase', 'Google Maps API', 'Razorpay', 'Node.js'],
     image: '/project-gharkachulha.png',
+    size: 'medium',
   },
   {
     id: 3,
@@ -34,6 +36,7 @@ const PROJECTS = [
       'A cinematic SaaS marketing site engineered to convert. Built with scroll-driven animations, 3D elements, and a design language that communicates trust and modernity from the first pixel.',
     technologies: ['React', 'Framer Motion', 'GSAP', 'Three.js', 'Vite'],
     image: '/project-feather-landing.png',
+    size: 'medium',
   },
   {
     id: 4,
@@ -44,6 +47,7 @@ const PROJECTS = [
       'An AI-powered workflow automation builder that turns complex business processes into elegant visual flows. Drag, drop, connect — and deploy in seconds. Built for teams who move fast.',
     technologies: ['Next.js', 'TypeScript', 'OpenAI API', 'Prisma', 'Vercel', 'Tailwind'],
     image: '/project-flowstrate.png',
+    size: 'large',
   },
   {
     id: 5,
@@ -54,6 +58,7 @@ const PROJECTS = [
       'The companion productivity suite to the Feather ecosystem. Smart task management, AI writing assistant, and a focus timer — all in one lightweight, beautifully designed mobile application.',
     technologies: ['React Native', 'Expo', 'OpenAI', 'Supabase', 'Reanimated'],
     image: '/project-feather-app.png',
+    size: 'full',
   },
 ]
 

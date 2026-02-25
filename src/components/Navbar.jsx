@@ -65,6 +65,7 @@ export default function Navbar() {
 
                 <a href="#" className="navbar-logo">
                     <img src="/logo-new.png" alt="WebOvens" className="navbar-logo-img" />
+                    <span className="navbar-logo-text">WebOvens</span>
                 </a>
 
                 <div className="navbar-right">
