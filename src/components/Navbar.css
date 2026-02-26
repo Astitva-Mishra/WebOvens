@@ -166,6 +166,35 @@
     transition: filter 0.5s ease;
 }
 
+.navbar-logo-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.navbar-logo-warm {
+    position: relative;
+    transition: opacity 600ms ease-in-out, filter 0.5s ease;
+}
+
+.navbar-logo-cold {
+    position: absolute;
+    left: 0;
+    top: 0;
+    transition: opacity 600ms ease-in-out, filter 0.5s ease;
+}
+
+.navbar-logo-warm.is-hidden,
+.navbar-logo-cold.is-hidden {
+    opacity: 0;
+}
+
+.navbar-logo-warm.is-visible,
+.navbar-logo-cold.is-visible {
+    opacity: 1;
+}
+
 .navbar-logo-text {
     font-family: var(--font-display);
     font-size: 18px;

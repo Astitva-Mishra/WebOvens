@@ -75,6 +75,29 @@
     flex-shrink: 0;
 }
 
+.newsletter-submit.is-disabled,
+.newsletter-submit:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.newsletter-status {
+    margin-top: 8px;
+    min-height: 20px;
+}
+
+.newsletter-status-text {
+    font-size: 0.85rem;
+}
+
+.newsletter-status-success {
+    color: #4ade80;
+}
+
+.newsletter-status-error {
+    color: #f97373;
+}
+
 /* ── Image Side ── */
 .newsletter-image-side {
     position: relative;

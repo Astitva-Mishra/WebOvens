@@ -1,6 +1,7 @@
-import { useRef, useState } from 'react'
+import { useRef, useState, useCallback } from 'react'
 import { motion, useInView, useScroll, useTransform } from 'framer-motion'
 import { ArrowRight, Mail } from 'lucide-react'
+import emailjs from '@emailjs/browser'
 import './Marquee.css'
 
 export default function Newsletter() {
@@ -8,6 +9,10 @@ export default function Newsletter() {
     const imgRef = useRef(null)
     const isInView = useInView(ref, { once: true, margin: '-100px' })
     const [email, setEmail] = useState('')
+    const [isLoading, setIsLoading] = useState(false)
+    const [successMessage, setSuccessMessage] = useState('')
+    const [errorMessage, setErrorMessage] = useState('')
+    const [lastSubmittedAt, setLastSubmittedAt] = useState(null)
 
     const { scrollYProgress } = useScroll({
         target: imgRef,
@@ -16,10 +21,79 @@ export default function Newsletter() {
 
     const imgY = useTransform(scrollYProgress, [0, 1], ['-8%', '8%'])
 
-    const handleSubmit = (e) => {
+    const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID
+    const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID
+    const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+    const TO_EMAIL = import.meta.env.VITE_NEWSLETTER_TO_EMAIL
+
+    const validateEmail = useCallback((value) => {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+        return emailRegex.test(value.trim())
+    }, [])
+
+    const canSubmit = useCallback(() => {
+        if (!lastSubmittedAt) return true
+        const now = Date.now()
+        const diffSeconds = (now - lastSubmittedAt) / 1000
+        return diffSeconds >= 10
+    }, [lastSubmittedAt])
+
+    const handleSubmit = async (e) => {
         e.preventDefault()
-        setEmail('')
+
+        setSuccessMessage('')
+        setErrorMessage('')
+
+        const trimmedEmail = email.trim()
+
+        if (!validateEmail(trimmedEmail)) {
+            setErrorMessage('Please enter a valid email address.')
+            return
+        }
+
+        if (!canSubmit()) {
+            setErrorMessage('Please wait a few seconds before subscribing again.')
+            return
+        }
+
+        if (!SERVICE_ID || !TEMPLATE_ID || !PUBLIC_KEY || !TO_EMAIL) {
+            setErrorMessage('Subscription service is currently unavailable. Please try again later.')
+            return
+        }
+
+        setIsLoading(true)
+
+        try {
+            const now = new Date()
+            const formattedDateTime = now.toLocaleString(undefined, {
+                year: 'numeric',
+                month: 'short',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: true
+            })
+
+            const templateParams = {
+                to_email: TO_EMAIL,
+                user_email: trimmedEmail,
+                submitted_at: formattedDateTime
+            }
+
+            await emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY)
+
+            setSuccessMessage('You are subscribed! We will keep you posted.')
+            setEmail('')
+            setLastSubmittedAt(Date.now())
+        } catch (err) {
+            setErrorMessage('Something went wrong while subscribing. Please try again in a moment.')
+        } finally {
+            setIsLoading(false)
+        }
     }
+
+    const isButtonDisabled = isLoading || !email.trim()
 
     return (
         <section className="newsletter" ref={ref}>
@@ -44,16 +118,37 @@ export default function Newsletter() {
                             <input
                                 type="email"
                                 value={email}
-                                onChange={(e) => setEmail(e.target.value)}
+                                onChange={(e) => {
+                                    setEmail(e.target.value)
+                                    if (successMessage) setSuccessMessage('')
+                                    if (errorMessage) setErrorMessage('')
+                                }}
                                 placeholder="Enter your email"
                                 className="newsletter-input"
                                 required
+                                autoComplete="email"
                             />
                         </div>
-                        <button type="submit" className="btn btn-primary newsletter-submit">
-                            Subscribe <ArrowRight size={16} />
+                        <button
+                            type="submit"
+                            className={`btn btn-primary newsletter-submit${isButtonDisabled ? ' is-disabled' : ''}`}
+                            disabled={isButtonDisabled}
+                        >
+                            {isLoading ? 'Subscribing…' : 'Subscribe'} <ArrowRight size={16} />
                         </button>
                     </form>
+                    <div className="newsletter-status">
+                        {successMessage && (
+                            <p className="newsletter-status-text newsletter-status-success">
+                                {successMessage}
+                            </p>
+                        )}
+                        {errorMessage && (
+                            <p className="newsletter-status-text newsletter-status-error">
+                                {errorMessage}
+                            </p>
+                        )}
+                    </div>
                 </motion.div>
 
                 {/* Image side */}

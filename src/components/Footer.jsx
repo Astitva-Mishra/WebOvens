@@ -75,8 +75,8 @@ export default function Footer() {
                     <div className="footer-col">
                         <span className="text-eyebrow footer-col-label">Get Started</span>
                         <p className="text-sm footer-col-desc">Ready to build something? Let's talk about your next project.</p>
-                        <a href="mailto:hello@webovens.com" className="btn btn-primary footer-cta">
-                            hello@webovens.com <ArrowUpRight size={14} />
+                        <a href="mailto:webovens.in@gmail.com" className="btn btn-primary footer-cta">
+                            webovens.in@gmail.com <ArrowUpRight size={14} />
                         </a>
                     </div>
                 </div>
