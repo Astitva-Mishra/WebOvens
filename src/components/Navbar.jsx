@@ -22,6 +22,14 @@ const secondaryLinks = [
 export default function Navbar() {
     const [scrolled, setScrolled] = useState(false)
     const [menuOpen, setMenuOpen] = useState(false)
+    const [isWarmLogo, setIsWarmLogo] = useState(true)
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setIsWarmLogo(prev => !prev)
+        }, 4000)
+        return () => clearInterval(interval)
+    }, [])
 
     useEffect(() => {
         const onScroll = () => setScrolled(window.scrollY > 80)
@@ -64,7 +72,18 @@ export default function Navbar() {
                 </div>
 
                 <a href="#" className="navbar-logo">
-                    <img src="/logo-new.png" alt="WebOvens" className="navbar-logo-img" />
+                    <div className="navbar-logo-wrapper">
+                        <img
+                            src="/logo.png"
+                            alt="WebOvens"
+                            className={`navbar-logo-img navbar-logo-warm ${isWarmLogo ? 'is-visible' : 'is-hidden'}`}
+                        />
+                        <img
+                            src="/logo-new.png"
+                            alt="WebOvens"
+                            className={`navbar-logo-img navbar-logo-cold ${!isWarmLogo ? 'is-visible' : 'is-hidden'}`}
+                        />
+                    </div>
                     <span className="navbar-logo-text">WebOvens</span>
                 </a>
 
