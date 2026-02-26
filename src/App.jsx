@@ -8,7 +8,7 @@ import FeatureCarousel from './components/FeatureCarousel'
 import CTA from './components/CTA'
 import Editorial from './components/Editorial'
 import Portfolio from './components/Portfolio'
-import Newsletter from './components/Marquee'
+import ProjectInquiry from './components/Marquee'
 import Footer from './components/Footer'
 
 function App() {
@@ -24,7 +24,7 @@ function App() {
           <CTA />
           <Editorial />
           <Portfolio />
-          <Newsletter />
+          <ProjectInquiry />
         </main>
         <Footer />
       </div>

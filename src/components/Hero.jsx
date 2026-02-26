@@ -120,7 +120,7 @@ export default function Hero() {
 
                                 {/* CTA Button */}
                                 <motion.a
-                                    href="#contact"
+                                    href="#start-project"
                                     className="btn hero-cta"
                                     initial={{ opacity: 0, y: 20 }}
                                     animate={{ opacity: 1, y: 0 }}
