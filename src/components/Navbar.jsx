@@ -16,7 +16,7 @@ const menuLinks = [
 const secondaryLinks = [
     { label: 'Portfolio', href: '#portfolio' },
     { label: 'About', href: '#about' },
-    { label: 'Contact', href: '#contact' },
+    { label: 'Contact', href: '#start-project' },
 ]
 
 export default function Navbar() {
@@ -88,10 +88,10 @@ export default function Navbar() {
                 </a>
 
                 <div className="navbar-right">
-                    <a href="#contact" className="navbar-link text-sm hide-mobile">
+                    <a href="#start-project" className="navbar-link text-sm hide-mobile">
                         Contact
                     </a>
-                    <a href="#contact" className="btn navbar-cta">
+                    <a href="#start-project" className="btn navbar-cta">
                         Start a Project
                     </a>
                 </div>
@@ -137,7 +137,7 @@ export default function Navbar() {
                     </div>
 
                     <div className="navbar-fullmenu-cards">
-                        <a href="#contact" className="navbar-fullmenu-card" onClick={() => setMenuOpen(false)}>
+                        <a href="#start-project" className="navbar-fullmenu-card" onClick={() => setMenuOpen(false)}>
                             <span className="text-lg">Start a Project</span>
                             <span className="text-sm" style={{ opacity: 0.6 }}>Let's build something great</span>
                         </a>
